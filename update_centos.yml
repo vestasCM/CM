@@ -1,0 +1,25 @@
+---
+- name: Update CentOS Systems
+  hosts: all  # Replace with your target hosts or group
+  become: yes  # Run tasks as sudo
+
+  tasks:
+    - name: Update all packages to the latest version (CentOS 8 and above)
+      dnf:
+        name: '*'
+        state: latest
+      when: "'8' in ansible_distribution_version or '9' in ansible_distribution_version"
+
+    - name: Update all packages to the latest version (CentOS 7)
+      yum:
+        name: '*'
+        state: latest
+      when: "'7' in ansible_distribution_version"
+
+    - name: Clean the cache to reclaim space (CentOS 8 and above)
+      command: dnf clean all
+      when: "'8' in ansible_distribution_version or '9' in ansible_distribution_version"
+
+    - name: Clean the cache to reclaim space (CentOS 7)
+      command: yum clean all
+      when: "'7' in ansible_distribution_version"

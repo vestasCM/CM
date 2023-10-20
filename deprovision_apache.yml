@@ -1,0 +1,25 @@
+---
+- name: Deprovision Apache Web Server
+  hosts: alma03
+  become: yes  # Run tasks as sudo
+
+  tasks:
+    - name: Stop Apache Service
+      systemd:
+        name: apache2
+        state: stopped
+
+    - name: Disable Apache Service
+      systemd:
+        name: apache2
+        enabled: no
+
+    - name: Uninstall Apache
+      apt:
+        name: apache2
+        state: absent
+
+    - name: Remove Apache Test HTML Page
+      file:
+        path: /var/www/html/index.html
+        state: absent

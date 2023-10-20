@@ -1,0 +1,8 @@
+---
+- name: Ping Target Hosts
+  hosts: all  # Replace with your specific target hosts or group
+  gather_facts: false  # Speed up the task by skipping the facts gathering phase
+
+  tasks:
+    - name: Ping
+      ping:

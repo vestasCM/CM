@@ -1,0 +1,10 @@
+---
+- name: Apache Auto-Remediation
+  hosts: all
+  become: yes  # Run tasks as sudo
+
+  tasks:
+    - name: Check if Apache is running
+      systemd:
+        name: httpd
+        state: started

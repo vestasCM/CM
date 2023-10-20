@@ -1,0 +1,8 @@
+---
+- name: Create a backup of a file
+  hosts: all
+  tasks:
+    - name: Backup the file
+      ansible.builtin.backup:
+        src: /var/www/html/index.html
+        backup_dir: /tmp

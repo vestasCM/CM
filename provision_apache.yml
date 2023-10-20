@@ -1,0 +1,25 @@
+---
+- name: Provision Apache Web Server
+  hosts: <your_target_host_group>
+  become: yes  # Run tasks as sudo
+
+  tasks:
+    - name: Update the package list
+      apt:
+        update_cache: yes
+
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Enable and Start Apache Service
+      systemd:
+        name: apache2
+        enabled: yes
+        state: started
+
+    - name: Add a Test HTML Page
+      copy:
+        content: "<h1>Hello, World!</h1>"
+        dest: /var/www/html/index.html
