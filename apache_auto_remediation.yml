@@ -1,6 +1,6 @@
 ---
 - name: Apache Auto-Remediation
-  hosts: all
+  hosts: alma03
   become: yes  # Run tasks as sudo
 
   tasks:
